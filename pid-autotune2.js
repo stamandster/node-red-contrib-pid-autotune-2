@@ -185,5 +185,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("pid-autotune", PidAutotune);
+  RED.nodes.registerType("pid-autotune2", PidAutotune);
 };
