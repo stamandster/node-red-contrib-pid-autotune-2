@@ -15,7 +15,6 @@ module.exports = function (RED) {
 //	node.sampleTime = config.sampleTime || 5; // was 5 should this be adjustable? to look for amplitude after heating
 //  node.waitTime = config.waitTime || 10; // was 5, should this be adjustable? between heating cycles
     node.outputstep = config.outstep || 100;
-    node.outmin = config.minout || 0 ; // new node
     node.outmax = config.maxout || 100;
     node.lookbackSec = config.lookback || 60; // was 30
     node.noiseband = config.noiseband || 3; // was 0.5
@@ -140,7 +139,6 @@ module.exports = function (RED) {
         outputstep: node.outputstep,
         sampleTimeSec: node.sampleTime,
         lookbackSec: node.lookbackSec,
-        outputMin: node.outmin,
         outputMax: node.outmax,
         logFn: log,
       });
