@@ -22,7 +22,7 @@
     icon: "font-awesome/fa-sliders",
     outputLabels: ["autotune result", "element output", "autotune log"],
     label: function () {
-      return this.name || "pid-autotune";
+      return this.name || "pid-autotune22";
     },
     oneditprepare: function () {
       $("#node-input-outstep").typedInput({
@@ -73,7 +73,7 @@
   });
 </script>
 
-<script type="text/html" data-template-name="pid-autotune">
+<script type="text/html" data-template-name="pid-autotune2">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -127,7 +127,7 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="pid-autotune">
+<script type="text/html" data-help-name="pid-autotune2">
   <p>A node to performe PID autotune on a brew rig</p>
   <h3>Inputs</h3>
   <span>Triggers the start of autotune.</span>
