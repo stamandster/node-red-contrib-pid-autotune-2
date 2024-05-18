@@ -1,4 +1,4 @@
-# node-red-contrib-pid-autotune2
+# node-red-contrib-pid-autotune-2
 
 A node-red node to perform PID autotune on a brew rig
 
