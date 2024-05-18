@@ -32,7 +32,7 @@ There are three outputs explained in order top to botton.
 
 | Setting           | Description                                                                  |
 | ----------------- | -----------------------------------------------------------------------------|
-| `Name`            | What ever you name the node                                                  |
+| `Name`            | Node Name                                                                    |
 | `Output step %`   | Sets the output when stepping up/down. Default 100                           |
 | `Max. output %`   | Sets the max power output. Default 100                                       |
 | `Lookback sec.`   | How far back to look for min/max temps. Default 30                           |
