@@ -16,8 +16,8 @@
   ],
   "node-red": {
     "nodes": {
-      "pid-autotune": "pid-autotune.js",
-      "kettle-sim": "kettle-sim.js"
+      "pid-autotune": "pid-autotune2.js",
+      "kettle-sim": "kettle-sim2.js"
     }
   },
   "author": "Christopher St.Amand",
