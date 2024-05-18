@@ -70,5 +70,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("kettle-sim", KettleSim);
+  RED.nodes.registerType("kettle-sim2", KettleSim);
 };
