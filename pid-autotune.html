@@ -5,13 +5,17 @@
     defaults: {
       name: { value: "" },
       outstep: { value: 100 },
+	    minout: { value: 0 },
       maxout: { value: 100 },
-      lookback: { value: 30 },
-      setpoint: { value: 65 },
+      lookback: { value: 60 },
+	    noiseband: { value: 3]},
+      setpoint: { value: 155 },
       setpointType: { value: "num" },
       tempVariable: { value: "payload" },
       tempVariableType: { value: "msg" },
-      tempVariableMsgTopic: { value: "temp-BK" }
+      tempVariableMsgTopic: { value: "temp-BK" },
+      autoStart: { value: true },
+      triggeredStartValue: { value: "start" },
     },
     inputs: 1,
     outputs: 3,
@@ -26,6 +30,11 @@
         types: ["num"],
         typeField: "#node-input-outstep-typed",
       });
+	  $("#node-input-minout").typedInput({
+        default: "num",
+        types: ["num"],
+        typeField: "#node-input-minout-typed",
+      });
       $("#node-input-maxout").typedInput({
         default: "num",
         types: ["num"],
@@ -36,6 +45,11 @@
         types: ["num"],
         typeField: "#node-input-lookback-typed",
       });
+	$("#node-input-noiseband").typedInput({
+        default: "num",
+        types: ["num"],
+        typeField: "#node-input-noiseband-typed",
+      });
       $("#node-input-setpoint").typedInput({
         default: this.setpointType || "num",
         types: ["num", "msg", "flow", "global"],
@@ -45,6 +59,11 @@
         default: this.tempVariableType || "msg",
         types: ["msg", "flow", "global"],
         typeField: "#node-input-tempVariable-typed",
+      });
+      $("#node-input-autoStart").typedInput({
+        default: "bool",
+        types: ["bool"],
+        typeField: "#node-input-autoStart-typed",
       });
     },
     oneditsave: function () {
@@ -64,6 +83,11 @@
     <input type="text" id="node-input-outstep" style="width:70%;" />
     <input type="hidden" id="node-input-outstep-typed" />
   </div>
+   <div class="form-row">
+    <label>Min. output %</label>
+    <input type="text" id="node-input-minout" style="width:70%;" />
+    <input type="hidden" id="node-input-minout-typed" />
+  </div>
   <div class="form-row">
     <label>Max. output %</label>
     <input type="text" id="node-input-maxout" style="width:70%;" />
@@ -73,6 +97,11 @@
     <label>Lookback sec.</label>
     <input type="text" id="node-input-lookback" style="width:70%;" />
     <input type="hidden" id="node-input-lookback-typed" />
+  </div>
+   <div class="form-row">
+    <label>Lookback sec.</label>
+    <input type="text" id="node-input-noiseband" style="width:70%;" />
+    <input type="hidden" id="node-input-noiseband-typed" />
   </div>
   <div class="form-row">
     <label>Setpoint</label>
@@ -87,6 +116,14 @@
   <div class="form-row">
     <label>Temp. topic</label>
     <input type="text" id="node-input-tempVariableMsgTopic" />
+  </div>
+  <div class="form-row">
+    <label>Auto Start</label>
+    <input type="text" id="node-input-autoStart" />
+  </div>
+  <div class="form-row">
+    <label>Start Value</label>
+    <input type="text" id="node-input-triggeredStartValue" />
   </div>
 </script>
 
