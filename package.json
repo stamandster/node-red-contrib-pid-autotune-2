@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-pid-autotune-2",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A node-red node to perform PID autotune on a brew rig",
   "scripts": {
     "test": "mocha \"test/**/*_spec.js\""
