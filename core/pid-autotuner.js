@@ -111,7 +111,7 @@ class AutoTuner {
     return Object.keys(AutoTuner._tuning_rules);
   }
 
-  getPIDParameters(tuningRule = "ziegler-nichols") {
+  getPIDParameters(tuningRule = "brewing") {
     const divisors = AutoTuner._tuning_rules[tuningRule];
     const kp = this._Ku / divisors[0];
     const ki = kp / (this._Pu / divisors[1]);
