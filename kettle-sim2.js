@@ -3,7 +3,7 @@ const Kette = require("./core/kettle");
 module.exports = function (RED) {
   "use strict";
 
-  function KettleSim(config) {
+  function KettleSim2(config) {
     RED.nodes.createNode(this, config);
     var node = this;
 
@@ -70,5 +70,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("kettle-sim2", KettleSim);
+  RED.nodes.registerType("kettle-sim2", KettleSim2);
 };
