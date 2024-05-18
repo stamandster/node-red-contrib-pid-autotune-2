@@ -11,7 +11,7 @@ A node-red node to performe PID autotune on a brew rig
 To install the current live version, please use Node-RED's Palette Manager or issue following commands:  
 ```
 $ cd ~/.node-red  
-$ npm install node-red-contrib-pid-autotune2
+$ npm install node-red-contrib-pid-autotune-2
 ```
 
 ## pid-autotune node
