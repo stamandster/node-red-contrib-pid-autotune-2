@@ -11,7 +11,7 @@ A node-red node to perform PID autotune on a brew rig
 To install the current live version, please use Node-RED's Palette Manager or issue following commands:  
 ```
 $ cd ~/.node-red  
-$ npm install node-red-contrib-pid-autotune-2
+$ npm install --save https://github.com/stamandster/node-red-contrib-pid-autotune-2/tarball/master
 ```
 
 ## pid-autotune node
@@ -34,9 +34,11 @@ There are three outputs explained in order top to botton.
 | ----------------- | -----------------------------------------------------------------------------|
 | `Name`            | Node Name                                                                    |
 | `Output step %`   | Sets the output when stepping up/down. Default 100                           |
+| `Min. output %`   | Sets the min power output. Default 0                                         |
 | `Max. output %`   | Sets the max power output. Default 100                                       |
 | `Lookback sec.`   | How far back to look for min/max temps. Default 30                           |
-| `Set point`       | The set point temp to do autotune against. Typical mash temp . Default 65    |
+| `Noiseband`       | For smoothing. Default 3                                                     |
+| `Setpoint`        | The set point temp to do autotune against. Typical mash temp . Default 155   |
 | `Temp.`           | From where to read current temp from. msg, flow or global variable.          |
 | `Temp. topic`     | If msg is selected for temp. Specify a topic from where current temp is from.|
 
