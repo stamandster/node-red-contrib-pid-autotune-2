@@ -51,8 +51,8 @@ class AutoTuner {
     var lookbackSec = config.lookbackSec || 60;
     var sampleTimeSec = config.sampleTimeSec || 5;
     var outputstep = config.outputstep || 10;
-    var outputMin = config.outputMin || 0 ; // was Number.MIN_VALUE
-    var outputMax = config.outputMax || 100 ; // was  Number.MAX_VALUE
+    var outputMin = config.outputMin || Number.MIN_VALUE;
+    var outputMax = config.outputMax || Number.MAX_VALUE;
     var noiseband = config.noiseband || 3; // was 0.5
 
     if (!config.setpoint) throw new Error("Kettle setpoint must be specified");
@@ -72,7 +72,7 @@ class AutoTuner {
     this._setpoint = config.setpoint;
     this._outputstep = outputstep;
     this._noiseband = noiseband;
-    this._outputMin = outputMin;
+    this._outputMin = 0;
     this._outputMax = outputMax;
 
     this._state = AutoTuner.STATE_OFF;
