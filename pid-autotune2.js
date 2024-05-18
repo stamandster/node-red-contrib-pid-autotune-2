@@ -3,7 +3,7 @@ const autoTuner = require("./core/pid-autotuner");
 module.exports = function (RED) {
   "use strict";
 
-  function PidAutotune(config) {
+  function PidAutotune2(config) {
     RED.nodes.createNode(this, config);
     var node = this;
 
@@ -185,5 +185,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("pid-autotune2", PidAutotune);
+  RED.nodes.registerType("pid-autotune2", PidAutotune2);
 };
