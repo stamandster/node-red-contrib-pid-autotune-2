@@ -10,16 +10,23 @@ module.exports = function (RED) {
     const RUNNING_EVENT_NAME = "AUTOTUNER_RUNNING";
     const COMPLETED_EVENT_NAME = "AUTOTUNER_COMPLETED";
 
-    node.sampleTime = 5;
-    node.waitTime = 5;
-    node.outstep = config.outstep || 100;
+    node.sampleTime = 5; // was 5 should this be adjustable? to look for amplitude after heating
+    node.waitTime = 10; // was 5, should this be adjustable? between heating cycles
+//	node.sampleTime = config.sampleTime || 5; // was 5 should this be adjustable? to look for amplitude after heating
+//  node.waitTime = config.waitTime || 10; // was 5, should this be adjustable? between heating cycles
+    node.outputstep = config.outstep || 100;
+	  node.outmin = config.minout || 0 ; // new node
     node.outmax = config.maxout || 100;
-    node.lookbackSec = config.lookback || 30;
+    node.lookbackSec = config.lookback || 60; // was 30
+	  node.noiseband = config.noiseband || 3; // was 0.5
     node.nextRun = config.nextRun || sleep;
 
     node.tempVariable = config.tempVariable || "payload";
     node.tempVariableType = config.tempVariableType || "msg";
     node.tempVariableMsgTopic = config.tempVariableMsgTopic || "temp-BK";
+
+    node.autoStart = config.autoStart || "true";
+    node.triggeredStartValue = config.triggeredStartValue|| "start"
 
     node.isRunning = false;
 
@@ -70,7 +77,7 @@ module.exports = function (RED) {
         if (node.tempVariableType === "msg") {
           node.latestTempReading > -1
             ? resolve(node.latestTempReading)
-            : reject("No temp. reading registered");
+            : reject("ERRTEMP01: No temperature reading found");
         } else {
           RED.util.evaluateNodeProperty(
             config.tempVariable,
@@ -79,7 +86,7 @@ module.exports = function (RED) {
             {},
             (err, value) => {
               if (err) {
-                reject("Unable to read temperature");
+                reject("ERRTEMP02: No temperature reading found");
               } else {
                 resolve(value);
               }
@@ -101,7 +108,7 @@ module.exports = function (RED) {
 
       if (node.stopSignaled) {
         node.emit(COMPLETED_EVENT_NAME, {
-          state: 'stoped',
+          state: 'Completed',
           params: { Kp: 0, Ki: 0, Kd: 0},
         });
         return;
@@ -126,14 +133,14 @@ module.exports = function (RED) {
     }
 
     async function startAutoTune(msg) {
-      log("Starting auto tune");
+      log("Autotune Started ...");
       const setpoint = await getSetpoint(msg);
       autoTuner.init({
         setpoint: setpoint,
-        outputstep: node.outstep,
+        outputstep: node.outputstep,
         sampleTimeSec: node.sampleTime,
         lookbackSec: node.lookbackSec,
-        outputMin: 0,
+        outputMin: node.outmin,
         outputMax: node.outmax,
         logFn: log,
       });
@@ -151,7 +158,7 @@ module.exports = function (RED) {
       node.send([
         { state: result.state, payload: result.params },
         { payload: 0 },
-        { payload: getLogText("Completed auto tune") },
+        { payload: getLogText("... Autotune Completed") },
       ]);
     });
 
@@ -161,7 +168,8 @@ module.exports = function (RED) {
           node.latestTempReading = msg.payload;
         }
 
-        if (node.isRunning === false) {
+        if (node.isRunning === false && 
+          (node.autoStart === "true" || (node.autoStart === "false" && msg.cmd === node.triggeredStartValue))) {
           startAutoTune(msg);
           node.isRunning = true;
         }
@@ -172,7 +180,7 @@ module.exports = function (RED) {
 
         if (done) done();
       } catch (error) {
-        if (done) done(error.message || "Something went wrong!");
+        if (done) done(error.message || "ERR001: Unknown Error");
       }
     });
   }
