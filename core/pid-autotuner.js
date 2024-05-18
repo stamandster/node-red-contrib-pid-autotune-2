@@ -4,7 +4,7 @@ const deque = require("./deque");
 
 class AutoTuner {
   static get PEAK_AMPLITUDE_TOLERANCE() {
-    return 0.05;
+    return 2.0; // was 0.05
   }
   static get STATE_OFF() {
     return "off";
@@ -31,7 +31,7 @@ class AutoTuner {
       "pessen-integral": [28, 50, 133],
       "some-overshoot": [60, 40, 60],
       "no-overshoot": [100, 40, 60],
-      brewing: [2.5, 3, 3600],
+      "brewing": [2.5, 3, 3600],
     };
   }
   /*
@@ -51,9 +51,9 @@ class AutoTuner {
     var lookbackSec = config.lookbackSec || 60;
     var sampleTimeSec = config.sampleTimeSec || 5;
     var outputstep = config.outputstep || 10;
-    var outputMin = config.outputMin || Number.MIN_VALUE;
-    var outputMax = config.outputMax || Number.MAX_VALUE;
-    var noiseband = config.noiseband || 0.5;
+    var outputMin = config.outputMin || 0 ; // was Number.MIN_VALUE
+    var outputMax = config.outputMax || 100 ; // was  Number.MAX_VALUE
+    var noiseband = config.noiseband || 3; // was 0.5
 
     if (!config.setpoint) throw new Error("Kettle setpoint must be specified");
     if (outputstep < 1)
