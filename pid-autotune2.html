@@ -5,7 +5,6 @@
     defaults: {
       name: { value: "" },
       outstep: { value: 100 },
-      minout: { value: 0 },
       maxout: { value: 100 },
       lookback: { value: 60 },
       noiseband: { value: 3 },
@@ -29,11 +28,6 @@
         default: "num",
         types: ["num"],
         typeField: "#node-input-outstep-typed",
-      });
-	  $("#node-input-minout").typedInput({
-        default: "num",
-        types: ["num"],
-        typeField: "#node-input-minout-typed",
       });
       $("#node-input-maxout").typedInput({
         default: "num",
@@ -82,11 +76,6 @@
     <label>Output step %</label>
     <input type="text" id="node-input-outstep" style="width:70%;" />
     <input type="hidden" id="node-input-outstep-typed" />
-  </div>
-   <div class="form-row">
-    <label>Min. output %</label>
-    <input type="text" id="node-input-minout" style="width:70%;" />
-    <input type="hidden" id="node-input-minout-typed" />
   </div>
   <div class="form-row">
     <label>Max. output %</label>
